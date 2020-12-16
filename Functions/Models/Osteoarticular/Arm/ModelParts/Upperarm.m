@@ -253,7 +253,7 @@ Humerus_position_set = {...
 
 num_solid=0;
 %% Humerus
-% Glenohumeral_J1
+% Glenohumeral_J1           % GH plane of elevation (ISB recommandations: Wu et al. 2005)
 num_solid=num_solid+1;        % number of the solid ...
 name=list_solid{num_solid}; % name of the solid
 eval(['incr_solid=s_' name ';'])  % number of the solid in the model
@@ -282,7 +282,7 @@ OsteoArticularModel(incr_solid).ClosedLoop=[];                 % if this solid c
 OsteoArticularModel(incr_solid).linear_constraint=[];
 OsteoArticularModel(incr_solid).Visual=0;
 
-% Glenohumeral_J2
+% Glenohumeral_J2           % Negative GH elevation (ISB recommandations: Wu et al. 2005)
 num_solid=num_solid+1;        % number of the solid ...
 name=list_solid{num_solid}; % name of the solid
 eval(['incr_solid=s_' name ';'])  % number of the solid in the model
@@ -306,7 +306,7 @@ OsteoArticularModel(incr_solid).c=[0 0 0]';
 OsteoArticularModel(incr_solid).Visual=0;
 % OsteoArticularModel(incr_solid).anat_position=Scapula_position_set;
 
-% Humerus
+% Humerus                   % GH axial rotation (ISB recommandations: Wu et al. 2005)
 num_solid=num_solid+1;         % number of the solid ...
 name=list_solid{num_solid}; % name of the solid
 eval(['incr_solid=s_' name ';'])  % number of the solid in the model
@@ -331,10 +331,10 @@ OsteoArticularModel(incr_solid).L={[Signe 'Humerus_ghJointNode'];[Signe 'Humerus
 OsteoArticularModel(incr_solid).wrap(1).name=['Wrap' Signe 'HumerusDelt'];
 OsteoArticularModel(incr_solid).wrap(1).anat_position=['Wrap' Signe 'HumerusDelt'];
 OsteoArticularModel(incr_solid).wrap(1).type='C'; % C: Cylinder or S: Sphere
-OsteoArticularModel(incr_solid).wrap(1).radius=k*0.05;
-OsteoArticularModel(incr_solid).wrap(1).R=[ 0.4515   -0.2896    (-1)^Signe_bool*0.8440;
-                                    0.5805    0.8136   (-1)^Signe_bool*-0.0313;
-                                    (-1)^Signe_bool*-0.6776    (-1)^Signe_bool*0.5041    0.5355];
+OsteoArticularModel(incr_solid).wrap(1).R=k*0.05;
+OsteoArticularModel(incr_solid).wrap(1).orientation=[ 0.4515   -0.2896    0.8440;
+                                    0.5805    0.8136   -0.0313;
+                                    -0.6776    0.5041    0.5355];
 OsteoArticularModel(incr_solid).wrap(1).location=Mirror*osim2antoine'.*[-0.0139 -0.0127 -0.0262]'+Humerus_ghJointNode';
 OsteoArticularModel(incr_solid).wrap(1).h=k*0.1;
 OsteoArticularModel(incr_solid).wrap(1).num_solid=incr_solid;
